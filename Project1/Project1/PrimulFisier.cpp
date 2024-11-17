@@ -350,6 +350,33 @@ Particularitati:
 - nu se initializeaza absolut deloc in constructori pentru ca nu preiau o valoare specifica pentru fiecare obiect in parte
 - se initializeaza o singura data in afara clasei: tipul de data al atribututlui static + nume clasa+ operatorul de rezolutie + numele atributului = valoare
 
+
+
+Pointeri
+Se declara cu ajutorul caracterului '*'.
+Adresa de memorie este un cod hexazecimal format din 8 caractere (cifre[0-9]/litere[a-f]) prin care compilatorul identifica fiecare atribut din codul nostru.
+Extragerea adreselor de memorie: prin plasarea semnului '&' in fata atributului respectiv
+Exemplu: cout << "Adresa de memorie a atributului denumireMagazin pentru obiectul m3: " << &(m3.getdenumireMagazin) << endl; (atributul trebuie sa fie public ca sa mearga)
+
+Pointerii sunt tot variabile cum sunt si variabilele in, float, double, bool si char diferenta fiind ca pointerii nu stocheaza valori
+ci stocheaza adrese de memorie.
+
+Diferenta dintre o variabila normala si una de tip pointer
+string numeStudent = "Ana";
+string* numeStudentPointer = "Ana"; //aici vom primi eroare
+
+=> Vrem sa dam valoare atunci folosim variabilele simple.
+=> Vrem sa dam adresa de memorie atunci folosim pointeri.
+
+Pointerii nu pot fi intializati cu valori pentru ca ei stocheaza adrese de memorie.
+
+string* numeStudentPointer = &(numeStudent); //acum pointerul este intializat cu adresa de memorie e variabilei numeStudent
+
+Cu pointerii putem sa facem doua operatii:
+1. Extragerea adeselor de memorie
+2. Deferentiere
+
+
 */
 
 //:: se numeste operator de rezolutie
@@ -442,6 +469,13 @@ void main()
 	cout << m3.getCUI() << endl;
 	cout << endl << endl;
 
+	//cout << "Adresa de memorie a atributului denumireMagazin pentru obiectul m3: " << &(m3.getdenumireMagazin) << endl;
+
+	//cum declaram si initializam un pointer cu o adresa de memorie
+	string numeStudent = "Ana";
+	string* numeStudentPointer = &(numeStudent);
+	cout << "Pointer-ul numeStudentPointer: " << numeStudentPointer << endl;
+	cout << endl;
 
 	/*
 		CardBancar c1;
