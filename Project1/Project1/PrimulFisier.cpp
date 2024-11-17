@@ -384,6 +384,21 @@ Cu pointerii putem sa facem doua operatii:
 //aici initializez atributul static
 int Magazin::clasaCAENPrincipala = 47;
 
+class Autobuz {
+
+private:
+	static int nrAutobuze;
+	const int idAutobuz;
+	int capacitate;
+	int nrPersoaneImbarcate;
+	char* producator;
+
+public:
+
+};
+
+int Autobuz::nrAutobuze = 0;
+
 void main()
 {
 	//aici vom testa tot ce se afla in clasa noastra, toate functiile, vom construi obiecte, vom distruge obiecte etc.
