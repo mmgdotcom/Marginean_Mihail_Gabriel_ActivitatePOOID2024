@@ -5,7 +5,7 @@
 //Bibliotecile
 //Intotdeauna incepem cu bibliotecile
 #include <iostream> //prima biblioteca input output stream
-#include<string>
+#include <string>
 using namespace std; //pentru a putea folosi variabila string
 
 //invatam sa ne construim clase si sa lucram cu clase
@@ -146,6 +146,8 @@ private:
 	int nrAngajati;
 	float suprafataMagazin;
 	bool esteNonStop;
+	const int CUI;
+	static int clasaCAENPrincipala; //47 pentru toate magazinele
 
 public:
 	//constructorul
@@ -169,7 +171,7 @@ public:
 	//4. Constructori cu toti parametrii (numarul maxim de parametrii)
 
 	//constructorul fara parametrii - il folosesc atunci cand nu cunoastem informatii despre obiectul nostru
-	Magazin() //nu trec nimic in paranteza pentru ca este constructor fara paramentrii deci atributele suntpractic necunoscute
+	Magazin() :CUI(0) //nu trec nimic in paranteza pentru ca este constructor fara paramentrii deci atributele sunt practic necunoscute
 	{
 		//chiar daca sunt necunoscute atributele nu pot fi lasate neinitializate
 		//dar le vom initializa cu valori default
@@ -180,6 +182,7 @@ public:
 		this->nrAngajati = 0;
 		this->suprafataMagazin = 0;
 		this->esteNonStop = 1;
+		//:CUI(0) echivalent cu this->CUI = 0; dar pentru ca este constant se initializeaza imediat dupa paranteze
 	}
 
 	//constructorul cu un parametru - va contine in lista de prametrii un singur atribut
@@ -187,7 +190,7 @@ public:
 	//=> 4 atribute => 4 constructori cu 1 parametru
 	//=> pot avea un singur constructor fara parametrii
 	//=> pot avea un singur constructor cu toti parametrii
-	Magazin(string denumireMagazin)
+	Magazin(string denumireMagazin) :CUI(0)
 	{
 		this->denumireMagazin = denumireMagazin;
 		this->nrAngajati = 0;
@@ -196,7 +199,7 @@ public:
 	}
 
 	//constructorul cu doi parametrii
-	Magazin(string denumireMagazin, int nrAngajati)
+	Magazin(string denumireMagazin, int nrAngajati) :CUI(0)
 	{
 		this->denumireMagazin = denumireMagazin;
 		this->nrAngajati = nrAngajati;
@@ -205,7 +208,7 @@ public:
 	}
 
 	//constructorul cu trei parametrii
-	Magazin(string denumireMagazin, int nrAngajati, float esteNonStop)
+	Magazin(string denumireMagazin, int nrAngajati, float esteNonStop) :CUI(0)
 	{
 		this->denumireMagazin = denumireMagazin;
 		this->nrAngajati = nrAngajati;
@@ -214,7 +217,7 @@ public:
 	}
 
 	//constructorul cu toti parametrii
-	Magazin(string denumireMagazin, int nrAngajati, float suprafataMagazin, bool esteNonStop)
+	Magazin(string denumireMagazin, int nrAngajati, float suprafataMagazin, bool esteNonStop, int CUI) :CUI(CUI)
 	{
 		//nu este corect sa scriu this->denumireMagazin = "Lidl"; pentru ca toate magazinele pe care mi le-as fi creat in void Main ()
 		//pe baza acestui constructor ar fi avut aceste valori pe care mi le-am setat aici
@@ -224,6 +227,7 @@ public:
 		this->nrAngajati = nrAngajati;
 		this->suprafataMagazin = suprafataMagazin;
 		this->esteNonStop = esteNonStop;
+		//:CUI(CUI) echivalent this->CUI = CUI;
 	}
 
 	/*
@@ -259,6 +263,10 @@ public:
 
 	bool getesteNonStop() {
 		return this->esteNonStop;
+	}
+
+	int getCUI() {
+		return this->CUI;
 	}
 
 	/*
@@ -303,6 +311,52 @@ public:
 };
 */
 
+/*
+Atributele particulare ale unui clase: constante si clasice
+
+Atributele constante: au o valoare constanta, ramane aceeasi intotdeauna.
+Ne gandim la caracteristicile care raman intotdeauna aceeasi.
+Nu poate fi lasat neinitializat in constructor.
+Suntem obligati sa le intiaializam in toti constructorii, altfel primi eroare.
+Atributele normale, daca sunt lasate neinitializate, nu genereaza erori dar vor primi niste valori aberante.
+=> initializam toate atributele in constructori.
+=> cand avem atribut constant nu mai putem sa avem constructor fara parametrii.
+=> atributele constante se intiailizeaza in exteriorul acoladelor constructorului, adica in lista de initializari a constractorului
+=> atributele constante nu primesc un setter pentru ca ele nu isi pot modifica valoarea initiala
+
+const + tip atribut (int, float etc.) + denumire atribut
+
+Exemple:
+const int CNP (pentru clasa student/persoana/angajat etc.)
+const string culoareOchi
+const int CUI (pentru clasa companie)
+
+
+Atributele statice: diferite total de celelalte atribute prin faptul ca ele nu descriu obiectele in sine ci descriu intreaga clasa.
+Preiau o valoare pentru intreaga clasa.
+Descriu clasa per total.
+Valoarea atributului static trebuie sa defineasca toate obiectele definite in clasa.
+Se defineste o singura data pentru toata clasa pentru toate obiectele.
+Reprezinta o variabila gliobala care se aplica pentru toata clasa.
+
+static + tip atribut + denumire atribut
+
+Exemple:
+static int nrRotiMasina (toate masinile pentru familie au 4 roti)
+static int TVA (acelasi tva pentru toate magazinele alimentare)
+static int taxaRestanta (toti studentii platesc aceeasi taxa pentru restanta)
+
+Particularitati:
+- nu se initializeaza absolut deloc in constructori pentru ca nu preiau o valoare specifica pentru fiecare obiect in parte
+- se initializeaza o singura data in afara clasei: tipul de data al atribututlui static + nume clasa+ operatorul de rezolutie + numele atributului = valoare
+
+*/
+
+//:: se numeste operator de rezolutie
+
+//aici initializez atributul static
+int Magazin::clasaCAENPrincipala = 47;
+
 void main()
 {
 	//aici vom testa tot ce se afla in clasa noastra, toate functiile, vom construi obiecte, vom distruge obiecte etc.
@@ -311,21 +365,23 @@ void main()
 
 	//regula: numeClasa, numeObiect(intre paranteza dam valori pentru atribute)
 
-	Magazin	m1("Lidl", 100, 350.5, 0);
+	Magazin	m1("Lidl", 100, 350.5, 0, 12345677);
 	//putem sa folosim doar getterii care ne intereseaza, nu e obligatoriu sa ii afisam pe toti
 	cout << "Afisez atributele obiectului m1" << endl;
 	cout << m1.getdenumireMagazin() << endl;
 	cout << m1.getnrAngajati() << endl;
 	cout << m1.getsuprafataMagazin() << endl;
 	cout << m1.getesteNonStop() << endl;
+	cout << m1.getCUI() << endl;
 	cout << endl << endl;
 
 	cout << "Afisez atributele obiectului m2" << endl;
-	Magazin	m2("Altex", 80, 150.99, 1);
+	Magazin	m2("Altex", 80, 150.99, 1, 12345678);
 	cout << m2.getdenumireMagazin() << endl;
 	cout << m2.getnrAngajati() << endl;
 	cout << m2.getsuprafataMagazin() << endl;
 	cout << m2.getesteNonStop() << endl;
+	cout << m2.getCUI() << endl;
 	cout << endl << endl;
 
 	cout << "Afisez atributele obiectului m3" << endl;
@@ -334,6 +390,7 @@ void main()
 	cout << m3.getnrAngajati() << endl;
 	cout << m3.getsuprafataMagazin() << endl;
 	cout << m3.getesteNonStop() << endl;
+	cout << m3.getCUI() << endl;
 	cout << endl << endl;
 
 	cout << "Afisez atributele obiectului m4" << endl;
@@ -342,6 +399,7 @@ void main()
 	cout << m4.getnrAngajati() << endl;
 	cout << m4.getsuprafataMagazin() << endl;
 	cout << m4.getesteNonStop() << endl;
+	cout << m4.getCUI() << endl;
 	cout << endl << endl;
 
 	cout << "Afisez atributele obiectului m5" << endl;
@@ -350,6 +408,7 @@ void main()
 	cout << m5.getnrAngajati() << endl;
 	cout << m5.getsuprafataMagazin() << endl;
 	cout << m5.getesteNonStop() << endl;
+	cout << m5.getCUI() << endl;
 	cout << endl << endl;
 
 	cout << "Afisez atributele obiectului m6" << endl;
@@ -358,14 +417,16 @@ void main()
 	cout << m6.getnrAngajati() << endl;
 	cout << m6.getsuprafataMagazin() << endl;
 	cout << m6.getesteNonStop() << endl;
+	cout << m6.getCUI() << endl;
 	cout << endl << endl;
 
 	cout << "Afisez atributele obiectului m7" << endl;
-	Magazin m7("Dedeman", 76, 0); //nu scrie intre ghilimele cuvinte separate prin spatiu ca mai trebuie sa adaugam ceva in cod ca sa mearga
+	Magazin m7("Dedeman", 76, 0); //nu scriem intre ghilimele cuvinte separate prin spatiu ca mai trebuie sa adaugam ceva in cod ca sa mearga
 	cout << m7.getdenumireMagazin() << endl;
 	cout << m7.getnrAngajati() << endl;
 	cout << m7.getsuprafataMagazin() << endl;
 	cout << m7.getesteNonStop() << endl;
+	cout << m7.getCUI() << endl;
 	cout << endl << endl;
 
 	m3.setdenumireMagazin("Zara");
@@ -378,6 +439,7 @@ void main()
 	cout << m3.getnrAngajati() << endl;
 	cout << m3.getsuprafataMagazin() << endl;
 	cout << m3.getesteNonStop() << endl;
+	cout << m3.getCUI() << endl;
 	cout << endl << endl;
 
 
@@ -407,6 +469,34 @@ void main()
 
 
 
+/*
+Sa se defineasca clasa Autobuz care are campurile:
+• nrAutobuze – intreg static – contorizeaza automat numarul de autobuze create;
+• idAutobuz - intreg constant - id-ul unic al autobuzului
+• capacitate – intreg – numarul de persoane care pot fi imbarcate in autobuz pe locuri;
+• nrPersoaneImbarcate – intreg – numarul de persoane aflate in autobuz. Nu poate fi mai mare decat capacitatea autobuzului;
+• producator – char* - numele producatorului autobuzului.
+
+Atributele clasei se definesc in zona privata a clasei
+
+Sa se defineasca pentru clasa Autobuz constructor fara parametri, constructor cu parametri si destructor. Constructorul cu parametri contine validari pentru parametrii primiti.
+
+Sa se defineasca pentru clasa Autobuz constructorul de copiere si metode accesor(get si set) pentru doua atribute la alegere. Testati in functia main().
+
+Sa se supraincarce pentru clasa Autobuz operatorul= (de atribuire) fara a genera memory leaks si Sa nu permita auto-atribuirea. Testati in functia main().
+
+Sa se supraincarce operatorul << pentru afisarea obiectelor de tipul Autobuz. Elementele sunt afisate pe aceeasi linie despartite prin punct si virgula si spatiu (; ). Testati in functia main().
+
+Sa se defineasca metoda getNumarLocuriLibere() care calculeaza si returneaza numarul de locuri libere ramase in autobuz. Testati in functia main().
+
+Sa se supraincarce operator de cast la int care determina numarul de persoane urcate deja in autobuz. Testati in functia main().
+
+Sa se supraincarce operator> care va compara doua autobuze dupa capacitatea acestora. Testati in functia main().
+
+Temele copiate sau create cu ChatGPT vor fi anulate iar lista cu persoanele respective va fi trimisa catre decanat.
+
+Incarcati fisierul CPP pana joi, 21 noiembrie, ora 23:00.
+*/
 
 
 
