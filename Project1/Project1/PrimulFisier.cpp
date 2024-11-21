@@ -2,11 +2,18 @@
 
 //construim o clasa in care vom adauga la fiecare meditatie noi concepte
 
+#define _CRT_SECURE_NO_WARNINGS
+
 //Bibliotecile
 //Intotdeauna incepem cu bibliotecile
 #include <iostream> //prima biblioteca input output stream
 #include <string>
+#include <cstring>
 using namespace std; //pentru a putea folosi variabila string
+
+
+
+
 
 //invatam sa ne construim clase si sa lucram cu clase
 
@@ -395,8 +402,88 @@ private:
 
 public:
 
+	// constructor fara parametri
+	Autobuz() : idAutobuz(++nrAutobuze), capacitate(0), nrPersoaneImbarcate(0), producator(nullptr) {}
+
+	// constructor cu parametri
+	Autobuz(int capacitate, int nrPersoaneImbarcate, const char* producator) : idAutobuz(++nrAutobuze) {
+		if (nrPersoaneImbarcate > capacitate) {
+			throw invalid_argument("Numarul de persoane imbarcate nu poate fi mai mare decat capacitatea.");
+		}
+		this->capacitate = capacitate;
+		this->nrPersoaneImbarcate = nrPersoaneImbarcate;
+		this->producator = new char[strlen(producator) + 1];
+		strcpy(this->producator, producator);
+	}
+
+	// destructor
+	~Autobuz() {
+		delete[] producator;
+	}
+
+	// constructor de copiere
+	Autobuz(const Autobuz& other) : idAutobuz(++nrAutobuze) {
+		this->capacitate = other.capacitate;
+		this->nrPersoaneImbarcate = other.nrPersoaneImbarcate;
+		this->producator = new char[strlen(other.producator) + 1];
+		strcpy(this->producator, other.producator);
+	}
+
+	// operator de atribuire
+	Autobuz& operator=(const Autobuz& other) {
+		if (this != &other) {
+			delete[] this->producator;
+			this->capacitate = other.capacitate;
+			this->nrPersoaneImbarcate = other.nrPersoaneImbarcate;
+			this->producator = new char[strlen(other.producator) + 1];
+			strcpy(this->producator, other.producator);
+		}
+		return *this;
+	}
+
+	// metode accesor
+	int getCapacitate() const {
+		return capacitate;
+	}
+
+	void setCapacitate(int capacitate) {
+		this->capacitate = capacitate;
+	}
+
+	int getNrPersoaneImbarcate() const {
+		return nrPersoaneImbarcate;
+	}
+
+	void setNrPersoaneImbarcate(int nrPersoaneImbarcate) {
+		if (nrPersoaneImbarcate > capacitate) {
+			throw invalid_argument("Numar de persoane imbarcate nu poate fi mai mare decat capacitatea.");
+		}
+		this->nrPersoaneImbarcate = nrPersoaneImbarcate;
+	}
+
+	// getNumarLocuriLibere
+	int getNumarLocuriLibere() const {
+		return capacitate - nrPersoaneImbarcate;
+	}
+
+	// operator de cast la int
+	operator int() const {
+		return nrPersoaneImbarcate;
+	}
+
+	// operator de comparatie >
+	bool operator>(const Autobuz& other) const {
+		return this->capacitate > other.capacitate;
+	}
+
+	// operator << pentru afisare
+	friend ostream& operator<<(ostream& os, const Autobuz& autobuz) {
+		os << "ID: " << autobuz.idAutobuz << "; Capacitate: " << autobuz.capacitate << "; Nr. pers imbarcate: " << autobuz.nrPersoaneImbarcate << "; Producator: " << (autobuz.producator ? autobuz.producator : "N/A");
+		return os;
+	}
 };
 
+// initializare atribut static
 int Autobuz::nrAutobuze = 0;
 
 void main()
@@ -514,6 +601,35 @@ void main()
 		cout << c1.cvv << endl;
 		cout << c1.soldCont << endl;
 	*/
+
+	try {
+		Autobuz a1;
+		Autobuz a2(50, 30, "Mercedes");
+		Autobuz a3 = a2; // Constructor de copiere
+
+		cout << a1 << endl;
+		cout << a2 << endl;
+		cout << a3 << endl;
+
+		a1.setCapacitate(40);
+		a1.setNrPersoaneImbarcate(20);
+
+		cout << "Nr locuri libere in a1: " << a1.getNumarLocuriLibere() << endl;
+		cout << "Nr persoane imbarcate in a1: " << int(a1) << endl;
+
+		if (a2 > a1) {
+			cout << "Autobuzul a2 are o capacitate mai mare decat a1." << endl;
+		}
+
+		a1 = a2; // operator de atribuire
+		cout << "Dupa atribuirea a2 catre a1: " << a1 << endl;
+
+	}
+	catch (const exception& e) {
+		cerr << "Eroare: " << e.what() << endl;
+	}
+
+
 }
 
 
