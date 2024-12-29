@@ -11,10 +11,6 @@
 #include <cstring>
 using namespace std; //pentru a putea folosi variabila string
 
-
-
-
-
 //invatam sa ne construim clase si sa lucram cu clase
 
 
@@ -360,12 +356,13 @@ Particularitati:
 
 
 Pointeri
+Ocupa intotdeauna 4 octeti.
 Se declara cu ajutorul caracterului '*'.
 Adresa de memorie este un cod hexazecimal format din 8 caractere (cifre[0-9]/litere[a-f]) prin care compilatorul identifica fiecare atribut din codul nostru.
 Extragerea adreselor de memorie: prin plasarea semnului '&' in fata atributului respectiv
 Exemplu: cout << "Adresa de memorie a atributului denumireMagazin pentru obiectul m3: " << &(m3.getdenumireMagazin) << endl; (atributul trebuie sa fie public ca sa mearga)
 
-Pointerii sunt tot variabile cum sunt si variabilele in, float, double, bool si char diferenta fiind ca pointerii nu stocheaza valori
+Pointerii sunt tot variabile cum sunt si variabilele int, float, double, bool si char diferenta fiind ca pointerii nu stocheaza valori
 ci stocheaza adrese de memorie.
 
 Diferenta dintre o variabila normala si una de tip pointer
@@ -383,6 +380,28 @@ Cu pointerii putem sa facem doua operatii:
 1. Extragerea adeselor de memorie
 2. Deferentiere
 
+Deferentierea
+Reprezinta procedeul prin care obtinem o valoare de la o anumita adresa de memorie.
+Procedeul invers extragerii unei adrese de memorie.
+Se face cu caracterul *
+
+De ce folosim pointerii si cum ii folosim
+1. Pointerii gestioneaza mult mai bine memoria unui program fata de variabilele normale.
+Un pointer ocupa mereu 4 octeti indiferent de tipul de pointer (int*, string*, float*, double*, bool*, char*, indiferent de valoarea variabilei.
+
+2. Vectorii
+Student s1; (presupunem ca avem deja clasa Student si avem studentul s1)
+int nota1 = 10;
+int nota2 = 9;
+int nota3 = 10;
+int nota4 = 9;
+int nota5 = 8;
+int nota6 = 10;
+//memorie ocupata de studentul s1: 4 pcteti * 6 variabile de tip int = 24 de octeti
+//vectorii sunt niste variabile care memoreaza o enumeratie de acelasi tip de valori
+int* vectorNoteStudent: 10, 9, 10, 9, 8, 10; -> ocupa 4 octeti
+
+
 
 */
 
@@ -391,6 +410,7 @@ Cu pointerii putem sa facem doua operatii:
 //aici initializez atributul static
 int Magazin::clasaCAENPrincipala = 47;
 
+/*
 class Autobuz {
 
 private:
@@ -481,10 +501,14 @@ public:
 		os << "ID: " << autobuz.idAutobuz << "; Capacitate: " << autobuz.capacitate << "; Nr. pers imbarcate: " << autobuz.nrPersoaneImbarcate << "; Producator: " << (autobuz.producator ? autobuz.producator : "N/A");
 		return os;
 	}
-};
+	
+}; //end Autobuz
+
+
 
 // initializare atribut static
 int Autobuz::nrAutobuze = 0;
+*/
 
 void main()
 {
@@ -579,6 +603,8 @@ void main()
 	cout << "Pointer-ul numeStudentPointer: " << numeStudentPointer << endl;
 	cout << endl;
 
+
+
 	/*
 		CardBancar c1;
 		c1.numeDetinator = "Daria";
@@ -602,6 +628,7 @@ void main()
 		cout << c1.soldCont << endl;
 	*/
 
+	/*
 	try {
 		Autobuz a1;
 		Autobuz a2(50, 30, "Mercedes");
@@ -628,7 +655,7 @@ void main()
 	catch (const exception& e) {
 		cerr << "Eroare: " << e.what() << endl;
 	}
-
+	*/
 
 }
 
