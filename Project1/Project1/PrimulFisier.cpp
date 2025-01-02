@@ -151,11 +151,18 @@ private:
 	bool esteNonStop;
 	const int CUI;
 	static int clasaCAENPrincipala; //47 pentru toate magazinele
+	char* numeProprietar;
+	int nrProduse; //se aplica si pentru preturiProduse si pentru denumiriProduse ca daca am 5 produse in magazin voi avea 5 preturi si 5 denumiri
+	//daca foloseam repere diferite foloseam cate un numarator pentru fiecare vector
+	float* preturiProduse;
+	string* denumiriProduse;
 
 public:
 	//constructorul
 	//este o metoda speciala care se foloseste pentru a construi obiecte pe baza atributelor din clasa
 	//pentru fiecare obiect in parte acest constructor va aloca cate o valoare pentru fiecare atribut
+	//a construi obiecte pe baza clasei = alocare memorie pentru atribute + initializare atributele cu valori
+	//doar pentru pointeri, pentru restul atributelor nu se face alocare de memorie
 
 	//regula de scriere a unui constructor:
 	/*
@@ -185,6 +192,17 @@ public:
 		this->nrAngajati = 0;
 		this->suprafataMagazin = 0;
 		this->esteNonStop = 1;
+
+
+		//problema apare in char pointer (char*) 
+		this->numeProprietar = new char[strlen("Necunoscut") + 1];
+		strcpy(this->numeProprietar, "Necunoscut");
+
+		//declar nrProduse = 0 pentru ca nu am informatii despre cate produse am in magazin => preturiProduse si denumiriProduse le initializez cu NULL
+		//NULL inseamna ca am zero elemente in vector => vector nu exista
+		this->nrProduse = 0;
+		this->preturiProduse = NULL;
+		this->denumiriProduse = NULL;
 		//:CUI(0) echivalent cu this->CUI = 0; dar pentru ca este constant se initializeaza imediat dupa paranteze
 	}
 
@@ -199,6 +217,16 @@ public:
 		this->nrAngajati = 0;
 		this->suprafataMagazin = 0;
 		this->esteNonStop = 1;
+
+		//problema apare in char pointer (char*) 
+		this->numeProprietar = new char[strlen("Necunoscut") + 1];
+		strcpy(this->numeProprietar, "Necunoscut");
+
+		//declar nrProduse = 0 pentru ca nu am informatii despre cate produse am in magazin => preturiProduse si denumiriProduse le initializez cu NULL
+		//NULL inseamna ca am zero elemente in vector => vector nu exista
+		this->nrProduse = 0;
+		this->preturiProduse = NULL;
+		this->denumiriProduse = NULL;
 	}
 
 	//constructorul cu doi parametrii
@@ -208,6 +236,16 @@ public:
 		this->nrAngajati = nrAngajati;
 		this->suprafataMagazin = 0;
 		this->esteNonStop = 1;
+
+		//problema apare in char pointer (char*) 
+		this->numeProprietar = new char[strlen("Necunoscut") + 1];
+		strcpy(this->numeProprietar, "Necunoscut");
+
+		//declar nrProduse = 0 pentru ca nu am informatii despre cate produse am in magazin => preturiProduse si denumiriProduse le initializez cu NULL
+		//NULL inseamna ca am zero elemente in vector => vector nu exista
+		this->nrProduse = 0;
+		this->preturiProduse = NULL;
+		this->denumiriProduse = NULL;
 	}
 
 	//constructorul cu trei parametrii
@@ -217,10 +255,20 @@ public:
 		this->nrAngajati = nrAngajati;
 		this->suprafataMagazin = 0;
 		this->esteNonStop = esteNonStop;
+
+		//problema apare in char pointer (char*) 
+		this->numeProprietar = new char[strlen("Necunoscut") + 1];
+		strcpy(this->numeProprietar, "Necunoscut");
+
+		//declar nrProduse = 0 pentru ca nu am informatii despre cate produse am in magazin => preturiProduse si denumiriProduse le initializez cu NULL
+		//NULL inseamna ca am zero elemente in vector => vector nu exista
+		this->nrProduse = 0;
+		this->preturiProduse = NULL;
+		this->denumiriProduse = NULL;
 	}
 
 	//constructorul cu toti parametrii
-	Magazin(string denumireMagazin, int nrAngajati, float suprafataMagazin, bool esteNonStop, int CUI) :CUI(CUI)
+	Magazin(string denumireMagazin, int nrAngajati, float suprafataMagazin, bool esteNonStop, int CUI, const char* numeProprietar, int nrProduse, float* preturiProduse, string* denumiriProduse) :CUI(CUI)
 	{
 		//nu este corect sa scriu this->denumireMagazin = "Lidl"; pentru ca toate magazinele pe care mi le-as fi creat in void Main ()
 		//pe baza acestui constructor ar fi avut aceste valori pe care mi le-am setat aici
@@ -230,6 +278,26 @@ public:
 		this->nrAngajati = nrAngajati;
 		this->suprafataMagazin = suprafataMagazin;
 		this->esteNonStop = esteNonStop;
+		this->nrProduse = nrProduse;
+
+		//pentru char pointer
+		//1.alocare de memorie pentru pointeri
+		this->numeProprietar = new char[strlen(numeProprietar) + 1]; //in parantezele patrate mentionez cate casute aloc. Cine stocheaza numarul de casute? Numaratorul.
+		//cum nu am numarator folosesc functia strlen() care calculeaza numarul de caractere din char pointer (char*) (nu ia in calcul caracterul terminator) motiv pentru care mai adaug + 1
+		//2. Initializare
+		strcpy(this->numeProprietar, numeProprietar); //functia strcpy primeste doi parametrii. Primul este detinatia (atributul this->numeProprietar iar al doilea este sursa deci in iau din lista de parametri.
+
+		//pentru restul pointerilor
+		//1.alocare de memorie pentru pointeri
+		this->preturiProduse = new float[this->nrProduse]; //in parantezele patrate mentionez cate casute aloc. Cine stocheaza numarul de casute? Numaratorul.
+		this->denumiriProduse = new string[this->nrProduse];
+
+		//2. Initializare
+		for (int i = 0; i < this->nrProduse; i++) {
+			this->preturiProduse[i] = preturiProduse[i];
+			this->denumiriProduse[i] = denumiriProduse[i];
+		}
+
 		//:CUI(CUI) echivalent this->CUI = CUI;
 	}
 
@@ -270,6 +338,22 @@ public:
 
 	int getCUI() {
 		return this->CUI;
+	}
+
+	char* getnumeProprietar() {
+		return this->numeProprietar;
+	}
+
+	int getnrProduse() {
+		return this->nrProduse;
+	}
+	
+	float* getpreturiProduse() {
+		return this->preturiProduse;
+	}
+
+	string* getdenumiriProduse() {
+		return this->denumiriProduse;
 	}
 
 	/*
@@ -401,6 +485,12 @@ int nota6 = 10;
 //vectorii sunt niste variabile care memoreaza o enumeratie de acelasi tip de valori
 int* vectorNoteStudent: 10, 9, 10, 9, 8, 10; -> ocupa 4 octeti
 
+int*, float*, double*, bool*, string*, (toti vectorii mai putin char*) vin la pachet cu un numarator
+char* nu vine la pachet cu un numarator
+daca la examen nu se specifica ce vector sa adaugam - in acest caz sa nu fim noi cei care ne alegem char pointer ca ne complicam
+folosim char pointer doar daca se specifica in mod express
+cel mai greu vector de folosint este char pointer
+cei mai usori vectori de folosit sunt cei numerici int*, float*, doble*
 
 
 */
@@ -518,7 +608,10 @@ void main()
 
 	//regula: numeClasa, numeObiect(intre paranteza dam valori pentru atribute)
 
-	Magazin	m1("Lidl", 100, 350.5, 0, 12345677);
+	float preturi[] = { 5.99, 70.4, 23.8, 9.6 };
+	string denumiri[] = { "Paine", "MuschiDeVita", "Cafea", "Ciocolata" };
+	Magazin	m1("Lidl", 100, 350.5, 0, 12345677, "Ion Popescu", 4, preturi, denumiri); //prin adaugarea denumirilor vectorilor 'preturi' si 'denumiri' i-am transmis compilatorului
+	//adresele acestora. Pentru "Ion Popescu" care e char pointer a trebui sa merg in constructorii cu toti parametrii sa adaug const inainte lui char* numeProprietar
 	//putem sa folosim doar getterii care ne intereseaza, nu e obligatoriu sa ii afisam pe toti
 	cout << "Afisez atributele obiectului m1" << endl;
 	cout << m1.getdenumireMagazin() << endl;
@@ -526,15 +619,27 @@ void main()
 	cout << m1.getsuprafataMagazin() << endl;
 	cout << m1.getesteNonStop() << endl;
 	cout << m1.getCUI() << endl;
+	cout << m1.getnumeProprietar() << endl;
+	cout << m1.getnrProduse() << endl;
+	for (int i = 0; i < m1.getnrProduse(); i++) {
+		cout << m1.getdenumiriProduse()[i] << " - " << m1.getpreturiProduse()[i] << " lei" << endl;
+	}
 	cout << endl << endl;
 
+	float preturi1[] = { 100.9, 500.78, 5900.34 };
+	string denumiri1[] = { "Tastatura", "Monitor", "Laptop" };
 	cout << "Afisez atributele obiectului m2" << endl;
-	Magazin	m2("Altex", 80, 150.99, 1, 12345678);
+	Magazin	m2("Altex", 80, 150.99, 1, 12345678, "Maria Ionescu", 3, preturi1, denumiri1);
 	cout << m2.getdenumireMagazin() << endl;
 	cout << m2.getnrAngajati() << endl;
 	cout << m2.getsuprafataMagazin() << endl;
 	cout << m2.getesteNonStop() << endl;
 	cout << m2.getCUI() << endl;
+	cout << m2.getnumeProprietar() << endl;
+	cout << m2.getnrProduse() << endl;
+	for (int i = 0; i < m2.getnrProduse(); i++) {
+		cout << m2.getdenumiriProduse()[i] << " - " << m2.getpreturiProduse()[i] << " lei" << endl;
+	}
 	cout << endl << endl;
 
 	cout << "Afisez atributele obiectului m3" << endl;
@@ -544,6 +649,11 @@ void main()
 	cout << m3.getsuprafataMagazin() << endl;
 	cout << m3.getesteNonStop() << endl;
 	cout << m3.getCUI() << endl;
+	cout << m3.getnumeProprietar() << endl;
+	cout << m3.getnrProduse() << endl;
+	for (int i = 0; i < m3.getnrProduse(); i++) {
+		cout << m3.getdenumiriProduse()[i] << " - " << m3.getpreturiProduse()[i] << " lei" << endl;
+	}
 	cout << endl << endl;
 
 	cout << "Afisez atributele obiectului m4" << endl;
@@ -553,6 +663,11 @@ void main()
 	cout << m4.getsuprafataMagazin() << endl;
 	cout << m4.getesteNonStop() << endl;
 	cout << m4.getCUI() << endl;
+	cout << m4.getnumeProprietar() << endl;
+	cout << m4.getnrProduse() << endl;
+	for (int i = 0; i < m4.getnrProduse(); i++) {
+		cout << m4.getdenumiriProduse()[i] << " - " << m4.getpreturiProduse()[i] << " lei" << endl;
+	}
 	cout << endl << endl;
 
 	cout << "Afisez atributele obiectului m5" << endl;
@@ -562,6 +677,11 @@ void main()
 	cout << m5.getsuprafataMagazin() << endl;
 	cout << m5.getesteNonStop() << endl;
 	cout << m5.getCUI() << endl;
+	cout << m5.getnumeProprietar() << endl;
+	cout << m5.getnrProduse() << endl;
+	for (int i = 0; i < m5.getnrProduse(); i++) {
+		cout << m5.getdenumiriProduse()[i] << " - " << m5.getpreturiProduse()[i] << " lei" << endl;
+	}
 	cout << endl << endl;
 
 	cout << "Afisez atributele obiectului m6" << endl;
@@ -571,6 +691,11 @@ void main()
 	cout << m6.getsuprafataMagazin() << endl;
 	cout << m6.getesteNonStop() << endl;
 	cout << m6.getCUI() << endl;
+	cout << m6.getnumeProprietar() << endl;
+	cout << m6.getnrProduse() << endl;
+	for (int i = 0; i < m6.getnrProduse(); i++) {
+		cout << m6.getdenumiriProduse()[i] << " - " << m6.getpreturiProduse()[i] << " lei" << endl;
+	}
 	cout << endl << endl;
 
 	cout << "Afisez atributele obiectului m7" << endl;
@@ -580,6 +705,11 @@ void main()
 	cout << m7.getsuprafataMagazin() << endl;
 	cout << m7.getesteNonStop() << endl;
 	cout << m7.getCUI() << endl;
+	cout << m7.getnumeProprietar() << endl;
+	cout << m7.getnrProduse() << endl;
+	for (int i = 0; i < m7.getnrProduse(); i++) {
+		cout << m7.getdenumiriProduse()[i] << " - " << m7.getpreturiProduse()[i] << " lei" << endl;
+	}
 	cout << endl << endl;
 
 	m3.setdenumireMagazin("Zara");
