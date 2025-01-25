@@ -43,9 +43,9 @@ using namespace std; //pentru a putea folosi variabila string
 //Atributele definesc structura clasei
 //Functiile definesc comportamentul clasei
 
-//O clasa poate fi orice obiect dfin realitate
+//O clasa poate fi orice obiect din realitate
 //Caracterizeaza orice ne inconjoara din viata de zi cu zi
-//Prin obiect intelegem orice ne inconjoara: o actiune, o cladire, o institutie, otara, un continent, o persoana, un doemniu economic etc.
+//Prin obiect intelegem orice ne inconjoara: o actiune, o cladire, o institutie, o tara, un continent, o persoana, un doemniu economic etc.
 
 //Cand alegem un obiect o sa trebuuiasca sa definim acel abiect din doua puncte de vedere
 //1. Prin trasaturile lui (prin atributele lui) si il descriem
@@ -66,7 +66,7 @@ using namespace std; //pentru a putea folosi variabila string
 //schelet => atribute
 //muschi => functii
 
-//O clasa poata fi vazut ca o schema pe baza careia urmeaza sa ne cream obiectele
+//O clasa poata fi vazuta ca o schema pe baza careia urmeaza sa ne cream obiectele
 
 
 //Clasa angajat
@@ -106,7 +106,7 @@ using namespace std; //pentru a putea folosi variabila string
 //cum definim o clasa in cpp
 //Pas 1: folosim cuvantul cheie class urmat de numele clasei care va fi intotdeauna la singular si cu litera mare
 //Pas 2: deschidem acolade iar dupa acolada de inchidere trebuie sa avem mereu punct si virgula
-//Pas 3: tot ce apartinme clasei (atribute si functii) se scrie in interiorul acoladei
+//Pas 3: tot ce apartine clasei (atribute si functii) se scrie in interiorul acoladei
 
 /*
 class Magazin
@@ -133,6 +133,8 @@ class Magazin
 //trasaturile le transpun prin atribute
 //2. Incapsularea - punerea atributelor in zona privata a clasei
 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 //Prima functie pe care o invatam: constructorul
 class Magazin
 {
@@ -165,13 +167,13 @@ public:
 	//doar pentru pointeri, pentru restul atributelor nu se face alocare de memorie
 
 	//regula de scriere a unui constructor:
-	/*
-	numeClasa(in paranteza trecem parametrii constructorului)
-	{
-		intre acolade initializam fiecare atribut in parte
-		this->numeAtribut = valoare; (scriem asa pentru fiecare atribut)
-	}
-	*/
+	
+	//numeClasa(in paranteza trecem parametrii constructorului)
+	//{
+	//	intre acolade initializam fiecare atribut in parte
+	//	this->numeAtribut = valoare; (scriem asa pentru fiecare atribut)
+	//}
+	
 
 	//tipuri de constructori
 	//1. Constructori fara parametrii
@@ -194,7 +196,7 @@ public:
 		this->esteNonStop = 1;
 
 
-		//problema apare in char pointer (char*) 
+		//problema apare in char pointer (char*)
 		this->numeProprietar = new char[strlen("Necunoscut") + 1];
 		strcpy(this->numeProprietar, "Necunoscut");
 
@@ -218,7 +220,7 @@ public:
 		this->suprafataMagazin = 0;
 		this->esteNonStop = 1;
 
-		//problema apare in char pointer (char*) 
+		//problema apare in char pointer (char*)
 		this->numeProprietar = new char[strlen("Necunoscut") + 1];
 		strcpy(this->numeProprietar, "Necunoscut");
 
@@ -301,25 +303,25 @@ public:
 		//:CUI(CUI) echivalent this->CUI = CUI;
 	}
 
-	/*
-	Metode accesor: getteri si setteri
-	Au rolul de a reda accesul catre zona privata a clasei pe care in mod normal nu o putem accesa
-	Getteri : redau accesul catre zona privata a clasei cu scopul de a afisa pe consola atributele(get = ia atributul si il afiseaza)
-	Setteri : redau accesul catre zona privata a clasei cu scopul de a modifica atributele(set = seteaza atributul, adica il modifica)
-	Metodele accesor au scopul de a reda accesul catre atributele din zona privata a clasei, care in mod normal nu pot fi afisate / modificate
-	deoarece ele sunt plasate in zona private a clasei insa metodele accesor vor rezolva aceste doua probleme.
 
-	=> getteri se folosesc pentru afisarea pe ecran a atributelor
-	Getteri vor folosi instructiunea return care este singura instructiune care perminte compilatorului
-	afisarea rezultatului dorit pe ecran deoarece au scopul de a afisa pe ecran atributele.
-	Tipul returnat al metodei trebuie sa coincida mereu cu tipul atributului din instructiunea return.
+	//Metode accesor: getteri si setteri
+	//Au rolul de a reda accesul catre zona privata a clasei pe care in mod normal nu o putem accesa
+	//Getteri : redau accesul catre zona privata a clasei cu scopul de a afisa pe consola atributele(get = ia atributul si il afiseaza)
+	//Setteri : redau accesul catre zona privata a clasei cu scopul de a modifica atributele(set = seteaza atributul, adica il modifica)
+	//Metodele accesor au scopul de a reda accesul catre atributele din zona privata a clasei, care in mod normal nu pot fi afisate / modificate
+	//deoarece ele sunt plasate in zona private a clasei insa metodele accesor vor rezolva aceste doua probleme.
+	//
+	//=> getteri se folosesc pentru afisarea pe ecran a atributelor
+	//Getteri vor folosi instructiunea return care este singura instructiune care perminte compilatorului
+	//afisarea rezultatului dorit pe ecran deoarece au scopul de a afisa pe ecran atributele.
+	//Tipul returnat al metodei trebuie sa coincida mereu cu tipul atributului din instructiunea return.
+	//
+	//Regula:
+	//tipDataAtribut getNumeAtribut(nu trecem nimic in paranteza)
+	//	{
+	//		return this -> numeAtribut;
+	//	}
 
-	Regula:
-	tipDataAtribut getNumeAtribut(nu trecem nimic in paranteza)
-		{
-			return this -> numeAtribut;
-		}
-	*/
 	string getdenumireMagazin() {
 		return this->denumireMagazin;
 	}
@@ -356,16 +358,16 @@ public:
 		return this->denumiriProduse;
 	}
 
-	/*
-	Setteri
-	Sunt folositi pentru a modifica valoarea atributelor atunci cand ne hotaram sa schombam vechile valori
-	void setNumeAtribut(tipAtribut numeParametru) {
-		this->numeAtribut = numeParametru;
-	}
-
-	Toate metodele care nu folosesc instructiunea return (adica toate metodele care nu vor avea ca scop afisarea unei valori
-	vor fi de tip void (folosim atunci cand nu vrem sa afisam nimic pe ecran).
-	*/
+	
+	//Setteri
+	//Sunt folositi pentru a modifica valoarea atributelor atunci cand ne hotaram sa schimbam vechile valori
+	//void setNumeAtribut(tipAtribut numeParametru) {
+	//	this->numeAtribut = numeParametru;
+	//}
+	//
+	//Toate metodele care nu folosesc instructiunea return (adica toate metodele care nu vor avea ca scop afisarea unei valori
+	//vor fi de tip void (folosim atunci cand nu vrem sa afisam nimic pe ecran).
+	
 
 	void setdenumireMagazin(string denumireNouaMagazin) {
 		this->denumireMagazin = denumireNouaMagazin;
@@ -384,6 +386,9 @@ public:
 	}
 
 };
+*/
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 /*
 //exemplu mai bun ca sa intelegem de ce atributele se pun in zona private si nu public
@@ -497,8 +502,12 @@ cei mai usori vectori de folosit sunt cei numerici int*, float*, doble*
 
 //:: se numeste operator de rezolutie
 
+//----------------------------------------------------------------------------------------------------------------------------------------
+/*
 //aici initializez atributul static
 int Magazin::clasaCAENPrincipala = 47;
+*/
+//----------------------------------------------------------------------------------------------------------------------------------------
 
 /*
 class Autobuz {
@@ -600,6 +609,8 @@ public:
 int Autobuz::nrAutobuze = 0;
 */
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
 void main()
 {
 	//aici vom testa tot ce se afla in clasa noastra, toate functiile, vom construi obiecte, vom distruge obiecte etc.
@@ -733,61 +744,62 @@ void main()
 	cout << "Pointer-ul numeStudentPointer: " << numeStudentPointer << endl;
 	cout << endl;
 
+	
+		//CardBancar c1;
+		//c1.numeDetinator = "Daria";
+		//c1.nrCard = "54585485485486625";
+		//c1.dataExpirare = "31.12.2027";
+		//c1.cvv = 123;
+		//c1.soldCont = 200000;
+		//
+		//cout << c1.numeDetinator << endl;
+		//cout << c1.nrCard << endl;
+		//cout << c1.dataExpirare << endl;
+		//cout << c1.cvv << endl;
+		//cout << c1.soldCont << endl;
+		//
+		//c1.soldCont = 0;
+		//
+		//cout << c1.numeDetinator << endl;
+		//cout << c1.nrCard << endl;
+		//cout << c1.dataExpirare << endl;
+		//cout << c1.cvv << endl;
+		//cout << c1.soldCont << endl;
+	
 
-
-	/*
-		CardBancar c1;
-		c1.numeDetinator = "Daria";
-		c1.nrCard = "54585485485486625";
-		c1.dataExpirare = "31.12.2027";
-		c1.cvv = 123;
-		c1.soldCont = 200000;
-
-		cout << c1.numeDetinator << endl;
-		cout << c1.nrCard << endl;
-		cout << c1.dataExpirare << endl;
-		cout << c1.cvv << endl;
-		cout << c1.soldCont << endl;
-
-		c1.soldCont = 0;
-
-		cout << c1.numeDetinator << endl;
-		cout << c1.nrCard << endl;
-		cout << c1.dataExpirare << endl;
-		cout << c1.cvv << endl;
-		cout << c1.soldCont << endl;
-	*/
-
-	/*
-	try {
-		Autobuz a1;
-		Autobuz a2(50, 30, "Mercedes");
-		Autobuz a3 = a2; // Constructor de copiere
-
-		cout << a1 << endl;
-		cout << a2 << endl;
-		cout << a3 << endl;
-
-		a1.setCapacitate(40);
-		a1.setNrPersoaneImbarcate(20);
-
-		cout << "Nr locuri libere in a1: " << a1.getNumarLocuriLibere() << endl;
-		cout << "Nr persoane imbarcate in a1: " << int(a1) << endl;
-
-		if (a2 > a1) {
-			cout << "Autobuzul a2 are o capacitate mai mare decat a1." << endl;
-		}
-
-		a1 = a2; // operator de atribuire
-		cout << "Dupa atribuirea a2 catre a1: " << a1 << endl;
-
-	}
-	catch (const exception& e) {
-		cerr << "Eroare: " << e.what() << endl;
-	}
-	*/
+	
+	//try {
+	//	Autobuz a1;
+	//	Autobuz a2(50, 30, "Mercedes");
+	//	Autobuz a3 = a2; // Constructor de copiere
+	//
+	//	cout << a1 << endl;
+	//	cout << a2 << endl;
+	//	cout << a3 << endl;
+	//
+	//	a1.setCapacitate(40);
+	//	a1.setNrPersoaneImbarcate(20);
+	//
+	//	cout << "Nr locuri libere in a1: " << a1.getNumarLocuriLibere() << endl;
+	//	cout << "Nr persoane imbarcate in a1: " << int(a1) << endl;
+	//
+	//	if (a2 > a1) {
+	//		cout << "Autobuzul a2 are o capacitate mai mare decat a1." << endl;
+	//	}
+	//
+	//	a1 = a2; // operator de atribuire
+	//	cout << "Dupa atribuirea a2 catre a1: " << a1 << endl;
+	//
+	//}
+	//catch (const exception& e) {
+	//	cerr << "Eroare: " << e.what() << endl;
+	//}
+	
 
 }
+*/
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
@@ -820,10 +832,176 @@ Temele copiate sau create cu ChatGPT vor fi anulate iar lista cu persoanele resp
 Incarcati fisierul CPP pana joi, 21 noiembrie, ora 23:00.
 */
 
+class Autobuz {
+private:
+	static int nrAutobuze;
+	const int idAutobuz;
+	int capacitate;
+	int nrPersoaneImbarcate;
+	char* producator;
 
+public:
 
+	Autobuz() : idAutobuz(++nrAutobuze) {
+		this->capacitate = 0;
+		this->nrPersoaneImbarcate = 0;
+		this->producator = new char[strlen("Necunoscut") + 1];
+		strcpy(producator, "Necunoscut");
+	};
 
+	Autobuz(int capacitate, int nrPersoaneImbarcate, const char* producator) : idAutobuz(++nrAutobuze) {
+		//apelez setCapacitate pentru validare
+		setCapacitate(capacitate);
+		
+		//daca apelez setCapacitate(capacitate) este redundant sa mai atribui this->capacitate
+		//if (capacitate > 0)
+		//{
+		//	this->capacitate = capacitate;
+		//}
+		//else {
+		//	this->capacitate = 0;
+		//};
+		if (nrPersoaneImbarcate >= 0 && nrPersoaneImbarcate <= this->capacitate) {
+			this->nrPersoaneImbarcate = nrPersoaneImbarcate;
+		}
+		else {
+			this->nrPersoaneImbarcate = 0;
+		};
+		if (producator != nullptr && strlen(producator) > 0) {
+			this->producator = new char[strlen(producator) + 1];
+			strcpy(this->producator, producator);
+		}
+		else {
+			this->producator = new char[strlen("Necunoscut") + 1];
+			strcpy(this->producator, "Necunoscut");
+		}
+	};
 
+	//constructor de copiere
+	Autobuz(const Autobuz&a) : idAutobuz(++nrAutobuze) {
+		this->capacitate = a.capacitate;
+		this->nrPersoaneImbarcate = a.nrPersoaneImbarcate;
+		this->producator = new char[strlen(a.producator) + 1];
+		strcpy(this->producator, a.producator);
+	};
+
+	~Autobuz() {
+		delete[] producator;
+	}
+
+	int getCapacitate() {
+		return this->capacitate;
+	};
+
+	char* getProducator() {
+		return this->producator;
+	};
+
+	//setter Capacitate
+	void setCapacitate(int capacitate) {
+		if (capacitate > 0) {
+			this->capacitate = capacitate;
+		}
+		else {
+			std::cout << "Capcitatea trebuie sa fie numar pozitiv." << std::endl;
+		}
+	};
+
+	//setter Producator
+	void setProducator(const char* producator) {
+		if (producator != nullptr && strlen(producator) > 0) {
+			delete[] this->producator;
+			this->producator = new char[strlen(producator) + 1];
+			strcpy(this->producator, producator);
+		}
+		else {
+			std::cout << "Numele producatorului nu poate fi gol!" << std::endl;
+		}
+	}
+
+	//supraincarcrea operatorului egal
+	Autobuz& operator= (const Autobuz& other) {
+		//verific pentru self-assignment
+		if (this == &other) {
+			return *this;
+		}
+	
+		//eliberez memoria obiectului curent
+		delete[] this->producator;
+	
+		//copiez datele din celalalt obiect
+		this->capacitate = other.capacitate;
+		this->nrPersoaneImbarcate = other.nrPersoaneImbarcate;
+	
+		//deep copy a pointerului producator
+		this->producator = new char[strlen(other.producator) + 1];
+		strcpy(this->producator, other.producator);
+	
+		return *this;
+	}
+
+};
+
+int Autobuz::nrAutobuze = 0;
+
+void main() {
+	
+	Autobuz a1;
+	std::cout << "Constructor fara parametri" << std::endl;
+	std::cout << "Capacitate: " << a1.getCapacitate() << std::endl;
+	std::cout << "Producator: " << a1.getProducator() << std::endl;
+	
+	std::cout << std::endl;
+	std::cout << "Constructor cu toti parametri dar am doar doi setteri" << std::endl;
+	
+	Autobuz a2(10, 100, "Mercedes");
+	std::cout << "Capacitate: " << a2.getCapacitate() << std::endl;
+	std::cout << "Producator: " << a2.getProducator() << std::endl;
+	
+	std::cout << std::endl;
+	std::cout << "Constructor de copiere" << std::endl;
+	
+	Autobuz a3 = a2; //apelez constructorul de copiere
+	std::cout << "Capacitate: " << a3.getCapacitate() << std::endl;
+	std::cout << "Producator: " << a3.getProducator() << std::endl;
+
+	std::cout << std::endl;
+
+	//creez doua noi autobuze
+	Autobuz a4(50, 20, "Volvo");
+	Autobuz a5;
+
+	//afisez a3 si a4 inainte de atribuire
+	std::cout << "Autobuz a4 initial: " << std::endl;
+	std::cout << "Capacitate a4: " << a4.getCapacitate() << std::endl;
+	std::cout << "Producator a4: " << a4.getProducator() << std::endl;
+
+	std::cout << "Autobuz a5 initial: " << std::endl;
+	std::cout << "Capacitate a5: " << a5.getCapacitate() << std::endl;
+	std::cout << "Producator a5: " << a5.getProducator() << std::endl;
+
+	//testez operatorul de atribuire
+	std::cout << "Atribui a4 lui a5" << std::endl;
+	a5 = a4;
+
+	//afisez a4 si a5 dupa atribuire
+	std::cout << "Autobuz a4 dupa atribuire: " << std::endl;
+	std::cout << "Capacitate a4: " << a4.getCapacitate() << std::endl;
+	std::cout << "Producator a4: " << a4.getProducator() << std::endl;
+
+	std::cout << "Autobuz a5 dupa atribuire: " << std::endl;
+	std::cout << "Capacitate a5: " << a5.getCapacitate() << std::endl;
+	std::cout << "Producator a5: " << a5.getProducator() << std::endl;
+
+	//testez self-assignment
+	std::cout << "Atribui a4 lui a4" << std::endl;
+	a4 = a4;
+
+	std::cout << "Autobuz a4 dupa self-assignment: " << std::endl;
+	std::cout << "Capacitate a4: " << a4.getCapacitate() << std::endl;
+	std::cout << "Producator a4: " << a4.getProducator() << std::endl;
+
+};
 
 
 
