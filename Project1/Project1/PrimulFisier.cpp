@@ -47,7 +47,7 @@ using namespace std; //pentru a putea folosi variabila string
 //Caracterizeaza orice ne inconjoara din viata de zi cu zi
 //Prin obiect intelegem orice ne inconjoara: o actiune, o cladire, o institutie, o tara, un continent, o persoana, un doemniu economic etc.
 
-//Cand alegem un obiect o sa trebuuiasca sa definim acel abiect din doua puncte de vedere
+//Cand alegem un obiect o sa trebuuiasca sa definim acel obiect din doua puncte de vedere
 //1. Prin trasaturile lui (prin atributele lui) si il descriem
 //Exexmplu:
 //student
@@ -952,15 +952,23 @@ void main() {
 	std::cout << "Producator: " << a1.getProducator() << std::endl;
 	
 	std::cout << std::endl;
+
+	std::cout << std::endl;
 	std::cout << "Constructor cu toti parametri dar am doar doi setteri" << std::endl;
 	
+	std::cout << std::endl;
+
 	Autobuz a2(10, 100, "Mercedes");
 	std::cout << "Capacitate: " << a2.getCapacitate() << std::endl;
 	std::cout << "Producator: " << a2.getProducator() << std::endl;
 	
 	std::cout << std::endl;
+
+	std::cout << std::endl;
 	std::cout << "Constructor de copiere" << std::endl;
 	
+	std::cout << std::endl;
+
 	Autobuz a3 = a2; //apelez constructorul de copiere
 	std::cout << "Capacitate: " << a3.getCapacitate() << std::endl;
 	std::cout << "Producator: " << a3.getProducator() << std::endl;
@@ -975,27 +983,39 @@ void main() {
 	std::cout << "Autobuz a4 initial: " << std::endl;
 	std::cout << "Capacitate a4: " << a4.getCapacitate() << std::endl;
 	std::cout << "Producator a4: " << a4.getProducator() << std::endl;
+	
+	std::cout << std::endl;
 
 	std::cout << "Autobuz a5 initial: " << std::endl;
 	std::cout << "Capacitate a5: " << a5.getCapacitate() << std::endl;
 	std::cout << "Producator a5: " << a5.getProducator() << std::endl;
 
+	std::cout << std::endl;
+
 	//testez operatorul de atribuire
 	std::cout << "Atribui a4 lui a5" << std::endl;
 	a5 = a4;
+
+	std::cout << std::endl;
 
 	//afisez a4 si a5 dupa atribuire
 	std::cout << "Autobuz a4 dupa atribuire: " << std::endl;
 	std::cout << "Capacitate a4: " << a4.getCapacitate() << std::endl;
 	std::cout << "Producator a4: " << a4.getProducator() << std::endl;
 
+	std::cout << std::endl;
+
 	std::cout << "Autobuz a5 dupa atribuire: " << std::endl;
 	std::cout << "Capacitate a5: " << a5.getCapacitate() << std::endl;
 	std::cout << "Producator a5: " << a5.getProducator() << std::endl;
 
+	std::cout << std::endl;
+
 	//testez self-assignment
 	std::cout << "Atribui a4 lui a4" << std::endl;
 	a4 = a4;
+
+	std::cout << std::endl;
 
 	std::cout << "Autobuz a4 dupa self-assignment: " << std::endl;
 	std::cout << "Capacitate a4: " << a4.getCapacitate() << std::endl;
