@@ -830,8 +830,8 @@ Sa se supraincarce operator> care va compara doua autobuze dupa capacitatea aces
 Temele copiate sau create cu ChatGPT vor fi anulate iar lista cu persoanele respective va fi trimisa catre decanat.
 
 Incarcati fisierul CPP pana joi, 21 noiembrie, ora 23:00.
-*/
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Autobuz {
 private:
 	static int nrAutobuze;
@@ -1023,6 +1023,174 @@ void main() {
 
 };
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+*/
+
+/*
+
+Aplicatie care sa gestioneze cartile de vizita:
+string nume;
+float latime;
+float lungime;
+
+1. Sa se introduca un atribut alocat dinamic cu denumirea numarTelefon;
+2. Partea de constructori, metode de acces pt cel.putin 1 atribut; afisare; (Regula celor 5: constructor implicit, constructor cu toti parametri, destructor, constructorul de copiere, operatorul=).
+3. Sa se implementeze operatorul == care sa compare suprafata a doua carti de vizita;
+4. Sa se implementeze operatorul de conversie la float care sa calculeze suprafata unei carti de vizita;
+5. Fisiere text (scriere &citire);
+6. Exemplificarea Has-a;
+7.container STL care sa calculeze suprafata cartilor de vizita
+
+*/
+
+//#define _CRT_SECURE_NO_WARNINGS
+//
+////Bibliotecile
+////Intotdeauna incepem cu bibliotecile
+//#include <iostream> //prima biblioteca input output stream
+//#include <string>
+//#include <cstring>
+//using namespace std; //pentru a putea folosi variabila string
+
+class CarteDeVizita {
+private:
+	string nume;
+	float lungime;
+	float latime;
+	char* numarTelefon;
+public:
+	//constructor implicit
+	CarteDeVizita() {
+		this->nume = "Necunoscut";
+		this->lungime = 0;
+		this->latime = 0;
+		this->numarTelefon = new char[strlen("Necunoscut") + 1];
+		strcpy(numarTelefon, "Necunoscut");
+	};
+
+	//constructor cu toti parametrii
+	CarteDeVizita(string nume, float lungime, float latime, const char* numarTelefon) {
+		this->nume = nume;
+		this->lungime = lungime;
+		this->latime = latime;
+		if (numarTelefon != nullptr) {
+			this->numarTelefon = new char[strlen(numarTelefon) + 1];
+			strcpy(this->numarTelefon, numarTelefon);
+		}
+		else {
+			this->numarTelefon = nullptr;
+		}
+	};
+
+	//constructor de copiere
+	CarteDeVizita(const CarteDeVizita& a) {
+		this->nume = a.nume;
+		this->lungime = a.lungime;
+		this->latime = a.latime;
+		if (numarTelefon != nullptr) {
+			this->numarTelefon = new char[strlen(a.numarTelefon) + 1];
+			strcpy(numarTelefon, a.numarTelefon);
+		}
+		else {
+			this->numarTelefon = nullptr;
+		}
+	};
+
+	//destructor
+	~CarteDeVizita() {
+		delete[] numarTelefon;
+	};
+
+	//getter
+	const char* getNumarTelefon() const {
+		return numarTelefon != nullptr ? numarTelefon: "Necunoscut";
+	};
+
+	//setter
+	void setNumarTelefon(const char* NumarTelefon) {
+		if (numarTelefon != nullptr && strlen(numarTelefon) > 1) {
+			delete[] this->numarTelefon;
+			this->numarTelefon = new char[strlen(numarTelefon) + 1];
+			strcpy(numarTelefon, numarTelefon);
+		}
+		else {
+			std::cout << "Numarul de telefon nu poate fi gol!" << std::endl;
+		};
+	}
+
+	//operatorul =
+	CarteDeVizita& operator=(const CarteDeVizita& other) {
+		if (this != &other) {
+			delete[] this->numarTelefon;
+
+			this->nume = other.nume;
+			this->lungime = other.lungime;
+			this->latime = other.latime;
+			if (other.numarTelefon != nullptr) {
+				this->numarTelefon = new char[strlen(other.numarTelefon) + 1];
+				strcpy(this->numarTelefon, other.numarTelefon);
+			}
+			else {
+				this->numarTelefon = nullptr;
+			}
+
+		}
+		return *this;
+	};
+
+	//metoda afisare
+	void afisare() const {
+		std::cout << "Nume: " << nume << "\n";
+		std::cout << "Lungime: " << lungime << "\n";
+		std::cout << "Latime: " << latime << "\n";
+		std::cout << "Numar telefon: " << (numarTelefon != nullptr ? numarTelefon : "Necunoscut") << "\n";
+	};
+
+	//operator de conversie la float
+	operator float() const {
+		return lungime * latime;
+	};
+
+	//operator ==
+	bool operator==(const CarteDeVizita& other) const {
+		return (latime * lungime) == (other.latime * other.lungime);
+	}
+
+};
+
+void main() {
+
+	// Create two business cards
+	CarteDeVizita c1("Maria", 100, 70, "123456789");
+	CarteDeVizita c2;
+
+	// Display initial values
+	std::cout << "Before assignment:\n";
+	std::cout << "CarteDeVizita c1:\n";
+	c1.afisare();
+	std::cout << "CarteDeVizita c2:\n";
+	c2.afisare();
+
+	// Use the assignment operator
+	std::cout << "\nAssigning c1 to c2...\n";
+	c2 = c1;
+
+	// Display values after assignment
+	std::cout << "After assignment:\n";
+	std::cout << "CarteDeVizita c1:\n";
+	c1.afisare();
+	std::cout << "CarteDeVizita c2:\n";
+	c2.afisare();
+
+	// Self-assignment test
+	std::cout << "\nTesting self-assignment (c1 = c1)...\n";
+	c1 = c1;
+
+	// Display values after self-assignment
+	std::cout << "CarteDeVizita c1 after self-assignment:\n";
+	c1.afisare();
+
+}
 
 
 
